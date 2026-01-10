@@ -16,7 +16,7 @@ def create_diamond_image(diagonal_h: int, diagonal_v: int, rgb_color: tuple) -> 
     """
     # Create black background
     square_length = max(diagonal_h, diagonal_v)  
-    image_array = np.zeros((square_length, square_length, 3), dtype=np.uint8)
+    image_array = np.random.randint(0, 256, (square_length, square_length, 3), dtype=np.uint8)
     
     # Create coordinate grids
     y, x = np.ogrid[:square_length, :square_length]

@@ -14,7 +14,7 @@ def create_circle_image(radius: int, rgb_color: tuple) -> npt.NDArray[np.uint8]:
     """
     # Create black background
     diameter = radius * 2
-    image_array = np.zeros((diameter, diameter, 3), dtype=np.uint8)
+    image_array = np.random.randint(0, 256, (diameter, diameter, 3), dtype=np.uint8)
     
     # Create coordinate grids
     y, x = np.ogrid[:diameter, :diameter]

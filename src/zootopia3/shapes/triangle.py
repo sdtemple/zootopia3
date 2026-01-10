@@ -17,7 +17,7 @@ def create_triangle_image(length: int, height: int, midpoint: float, rgb_color: 
     """
     # Create black background
     square_length = max(length, height)  
-    image_array = np.zeros((square_length, square_length, 3), dtype=np.uint8)
+    image_array = np.random.randint(0, 256, (square_length, square_length, 3), dtype=np.uint8)
     
     # Create coordinate grids
     y, x = np.ogrid[:square_length, :square_length]

@@ -16,7 +16,7 @@ def create_rectangle_image(width: int, height: int, rgb_color: tuple) -> npt.NDA
     """
     # Create black background
     square_length = max(width, height)  
-    image_array = np.zeros((square_length, square_length, 3), dtype=np.uint8)
+    image_array = np.random.randint(0, 256, (square_length, square_length, 3), dtype=np.uint8)
     
     # Create mask for rectangle
     mask = (np.arange(square_length).reshape(-1, 1) < height) & (np.arange(square_length).reshape(1, -1) < width)
