@@ -1,0 +1,57 @@
+import numpy as np
+import numpy.typing as npt
+
+def create_circle_image(radius: int, rgb_color: tuple) -> npt.NDArray[np.uint8]:
+    """
+    Create a circle with RGB color in a square pixel image.
+    
+    Args:
+        radius: The radius of the circle in pixels.
+        rgb_color: Tuple of (R, G, B) values (0-255)
+    
+    Returns:
+        (diameter, diameter, 3) numpy array representing the image with a colored circle on black background.
+    """
+    # Create black background
+    diameter = radius * 2
+    image_array = np.zeros((diameter, diameter, 3), dtype=np.uint8)
+    
+    # Create coordinate grids
+    y, x = np.ogrid[:diameter, :diameter]
+    center = radius
+    
+    # Create mask for circle
+    mask = (x - center) ** 2 + (y - center) ** 2 <= radius ** 2
+    
+    # Apply RGB color to circle area
+    image_array[mask] = rgb_color
+    
+    return image_array
+
+class Circle:
+    def __init__(self, radius: int, rgb_color: tuple, rgb_name: str):
+        self.radius = radius
+        self.rgb_color = rgb_color
+        self.rgb_name = rgb_name
+        self.image = create_circle_image(radius, rgb_color)
+    def __repr__(self) -> str:
+        return f"Circle(radius={self.radius}, rgb_color={self.rgb_color}, rgb_name='{self.rgb_name}')"
+    def __str__(self) -> str:
+        return f"Circle of radius {self.radius} with color {self.rgb_name} ({self.rgb_color})"
+    def get_image(self) -> npt.NDArray[np.uint8]:
+        return self.image
+    def get_radius(self) -> int:
+        return self.radius
+    def get_rgb_color(self) -> tuple:
+        return self.rgb_color
+    def get_rgb_name(self) -> str:
+        return self.rgb_name
+    def get_area(self) -> float:
+        """Calculate the area of the circle."""
+        return np.pi * self.radius ** 2
+    def get_circumference(self) -> float:
+        """Calculate the circumference of the circle."""
+        return 2 * np.pi * self.radius
+    def get_diameter(self) -> int:
+        """Get the diameter of the circle."""
+        return self.radius * 2
