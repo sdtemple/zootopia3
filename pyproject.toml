@@ -33,7 +33,7 @@ dependencies = [
 [project.optional-dependencies]
 notebook = [
     "jupyterlab>=4.0.0",
-    "ipykernel",
+    "ipykernel>=7.0.1",
 ]
 vizualization = [
     "seaborn", 

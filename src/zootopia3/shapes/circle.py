@@ -29,15 +29,23 @@ def create_circle_image(radius: int, rgb_color: tuple) -> npt.NDArray[np.uint8]:
     return image_array
 
 class Circle:
-    def __init__(self, radius: int, rgb_color: tuple, rgb_name: str):
+    '''Class representing a circle shape with various properties and methods.'''
+    def __init__(self, radius: int, rgb_color: tuple, rgb_name: str) -> None:
+        '''Initialize a Circle instance.
+
+        Args:
+            radius: The radius of the circle in pixels.
+            rgb_color: Tuple of (R, G, B) values (0-255).
+            rgb_name: Name of the RGB color.
+        '''
         self.radius = radius
         self.rgb_color = rgb_color
         self.rgb_name = rgb_name
         self.image = create_circle_image(radius, rgb_color)
     def __repr__(self) -> str:
-        return f"Circle(radius={self.radius}, rgb_color={self.rgb_color}, rgb_name='{self.rgb_name}')"
+        return f"Circle(radius={self.radius}, rgb_color={self.rgb_color})"
     def __str__(self) -> str:
-        return f"Circle of radius {self.radius} with color {self.rgb_name} ({self.rgb_color})"
+        return f"Circle of radius {self.radius} with color {self.rgb_name}"
     def get_image(self) -> npt.NDArray[np.uint8]:
         return self.image
     def get_radius(self) -> int:

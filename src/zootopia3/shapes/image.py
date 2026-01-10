@@ -1,5 +1,6 @@
 import numpy as np
 import numpy.typing as npt
+from random import randint
 from .triangle import Triangle
 from .rectangle import Rectangle
 from .circle import Circle
@@ -27,7 +28,10 @@ def create_shape_image(shape, dim1, dim2, *args, **kwargs) -> npt.NDArray[np.uin
     shape_instance = shape(*args, **kwargs)
     shape_image = shape_instance.get_image()
     # Overlay the shape image onto the background
-    image_array[:shape_image.shape[0], :shape_image.shape[1]] = shape_image
+    size = max(shape_image.shape[0], shape_image.shape[1])
+    x_start = randint(0, image_array.shape[0] - size)
+    y_start = randint(0, image_array.shape[1] - size)
+    image_array[x_start:x_start+size, y_start:y_start+size] = shape_image
     return image_array
 
 class Shape():
@@ -44,7 +48,7 @@ class Shape():
         self.shape_name = shape_type.lower()
         self.image = create_shape_image(shape_classes[shape_type.lower()], dim1, dim2, *args, **kwargs)
     def __repr__(self) -> str:
-        return f"Shape(shape_type='{self.shape_name}', shape_instance={self.shape_instance})"
+        return f"Shape(shape_type='{self.shape_name}', shape_instance={self.shape_instance.__repr__()})"
     def __str__(self) -> str:
         return f"Shape of type {self.shape_name} embedded in noise background"
     def get_image(self) -> npt.NDArray[np.uint8]:
