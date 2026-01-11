@@ -103,7 +103,10 @@ def simulate_shapes(num_examples: int,
         images: List of generated shape images as numpy arrays.
     '''
 
-    num_examples *= 8 if shades else num_examples *= 6
+    if shades:
+        num_examples *= 8
+    else:
+        num_examples *= 6
     target_color = np.empty(num_examples, dtype=StringDType)
     target_shape = np.empty(num_examples, dtype=StringDType)
     images = np.zeros(
