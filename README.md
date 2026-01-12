@@ -14,6 +14,10 @@ Alongside these datasets, we fit the following model objectives:
 1. (Classification) Predict the shape and color in the image
 2. (Regression) Predict the next time steps of the sine function
 
+## Usage
+
+Learn how to train neural networks from scratch.
+
 ## Requirements
 
 - Python 3.10+
