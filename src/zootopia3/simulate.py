@@ -1,7 +1,52 @@
 import numpy as np
+import numpy.typing as npt
 from numpy.dtypes import StringDType
 from random import randint
 from .shapes import Shape
+from .waves import create_sinusoid
+
+def simulate_sinusoids(num_each,
+                        amplitudes,
+                        frequencies,
+                        phases,
+                        vertical_shifts,
+                        length=50,
+                        ) -> npt.NDArray[np.uint8]:
+    '''Simulate the data of many sine waves.
+
+    Parameters
+    ----------
+    amplitudes : list[float]
+    frequencies : list[float]
+    phases : list[float]
+    vertical_shifts : list[float]
+
+    Returns
+    -------
+        Two-dimensional array, where each row is a sine wave
+
+    '''
+    itr = 0
+    X = np.empty(
+        (num_each * len(amplitudes) * len(frequencies) * len(phases) * len(vertical_shifts), 
+            length
+        ),
+        dtype=np.float32
+    )
+    for _ in range(num_each):
+        for amplitude in amplitudes:
+            for frequency in frequencies:
+                for phase in phases:
+                    for vertical_shift in vertical_shifts:
+                        X[itr,] = create_sinusoid(
+                            amplitude,
+                            frequency,
+                            phase,
+                            vertical_shift,
+                            length
+                        )
+                        itr += 1
+    return X
 
 def perturb_color(rgb_color, magnitude):
     '''Modify the RGB color by adding or subtracting a random value.
