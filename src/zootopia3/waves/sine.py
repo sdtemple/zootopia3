@@ -1,9 +1,13 @@
 import numpy as np
 import numpy.typing as npt
 
-def create_sinusoid(amplitude: float, frequency: float, phase: float, vertical_shift: float, length: int) -> npt.NDArray[np.uint8]:
+def create_sinusoid(amplitude: float, 
+                    frequency: float, 
+                    phase: float, 
+                    vertical_shift: float, 
+                    length: int) -> npt.NDArray[np.uint8]:
     """
-    Create a sine wave with RGB color in a square pixel image.
+    Create a sine wave.
     
     Args:
         amplitude: The amplitude of the sine wave.

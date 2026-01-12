@@ -1,9 +1,10 @@
 from .shapes import Shape
 from .waves import create_sinusoid
-from .simulate import simulate_shapes
+from .simulate import simulate_shapes, simulate_sinusoids
 
 __all__ = [
     'Shape', 
     'create_sinusoid', 
-    'simulate_shapes'
+    'simulate_shapes',
+    'simulate_sinusoids'
 ]
