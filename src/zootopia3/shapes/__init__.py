@@ -1,2 +1,2 @@
-from .image import Shape
+from .shape import Shape
 __all__ = ['Shape']

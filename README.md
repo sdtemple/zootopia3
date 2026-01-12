@@ -14,6 +14,18 @@ Alongside these datasets, we fit the following model objectives:
 1. (Classification) Predict the shape and color in the image
 2. (Regression) Predict the next time steps of the sine function
 
+## Requirements
+
+- Python 3.9+
+
+## Install
+
+```
+pip install -e .
+```
+
+
+## File structure
 
 .
 ├── LICENSE

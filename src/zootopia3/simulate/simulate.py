@@ -2,8 +2,8 @@ import numpy as np
 import numpy.typing as npt
 from numpy.dtypes import StringDType
 from random import randint
-from .shapes import Shape
-from .waves import create_sinusoid
+from ..shapes import Shape
+from ..waves import create_sinusoid
 
 def simulate_sinusoids(num_each,
                         amplitudes,
