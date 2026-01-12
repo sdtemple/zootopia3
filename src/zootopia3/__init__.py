@@ -5,6 +5,4 @@ from .simulate import simulate_shapes, simulate_sinusoids
 __all__ = [
     'Shape', 
     'create_sinusoid', 
-    'simulate_shapes',
-    'simulate_sinusoids'
 ]
