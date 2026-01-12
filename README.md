@@ -16,7 +16,7 @@ Alongside these datasets, we fit the following model objectives:
 
 ## Requirements
 
-- Python 3.9+
+- Python 3.10+
 
 ## Install
 
