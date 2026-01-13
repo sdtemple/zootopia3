@@ -36,6 +36,8 @@ class Rectangle:
                     height: int, 
                     rgb_color: tuple, 
                     rgb_name: str,
+                    upside_down: bool = False,
+                    sideways: bool = False,
                     ) -> None:
         '''Initialize a Rectangle instance.
         
@@ -44,6 +46,8 @@ class Rectangle:
             height: The height of the rectangle in pixels.
             rgb_color: Tuple of (R, G, B) values (0-255).
             rgb_name: Name of the RGB color.
+            upside_name: this does nothing
+            sideways: this does nothing
         '''
         self.width = width
         self.height = height
@@ -61,8 +65,10 @@ class Rectangle:
     def get_height(self) -> int:
         return self.height
     def get_rgb_color(self) -> tuple:
+        """Get the (R,G,B) tuple encoding of color"""
         return self.rgb_color
     def get_rgb_name(self) -> str:
+        """Get the user-specified name of the color"""
         return self.rgb_name
     def get_area(self) -> int:
         """Calculate the area of the rectangle."""
@@ -70,3 +76,5 @@ class Rectangle:
     def get_perimeter(self) -> int:
         """Calculate the perimeter of the rectangle."""
         return 2 * (self.width + self.height)
+    def is_square(self) -> bool:
+        return self.width == self.height

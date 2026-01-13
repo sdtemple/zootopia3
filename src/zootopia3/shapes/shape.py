@@ -18,6 +18,8 @@ def create_shape_image(shape, dim1, dim2, *args, **kwargs) -> npt.NDArray[np.uin
     
     Args:
         shape: The shape class (Triangle, Rectangle, Circle, Diamond).
+        dim1: size of the horizontal axis of the image
+        dim2: size of the vertical axis of the image
         *args: Positional arguments for the shape constructor.
         **kwargs: Keyword arguments for the shape constructor.
 
@@ -35,7 +37,13 @@ def create_shape_image(shape, dim1, dim2, *args, **kwargs) -> npt.NDArray[np.uin
     return image_array
 
 class Shape():
-    def __init__(self, shape_type: str, dim1: int, dim2: int, *args, **kwargs):
+    def __init__(self, 
+                    shape_type: str, 
+                    dim1: int, 
+                    dim2: int, 
+                    *args, 
+                    **kwargs
+                    ):
         shape_classes = {
             'triangle': Triangle,
             'rectangle': Rectangle,
@@ -52,10 +60,14 @@ class Shape():
     def __str__(self) -> str:
         return f"Shape of type {self.shape_name} embedded in noise background"
     def get_image(self) -> npt.NDArray[np.uint8]:
+        """Access array representing RGB pixelated image"""
         return self.image
     def get_rgb_color(self) -> tuple:
+        """Access RGB color tuple of primary shape in image"""
         return self.shape_instance.get_rgb_color()
     def get_rgb_name(self) -> str:
+        """Access name of color of primary shape in image"""
         return self.shape_instance.get_rgb_name()
     def get_shape_name(self) -> str:
+        """Access name of the primary shape in the image"""
         return self.shape_name

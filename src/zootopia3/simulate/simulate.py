@@ -63,17 +63,17 @@ def perturb_color(rgb_color, magnitude):
     g = rgb_color[1]
     b = rgb_color[2]
     if r == 255:
-        r -= randint(0, magnitude)
+        r -= magnitude
     if g == 255:
-        g -= randint(0, magnitude)
+        g -= magnitude
     if b == 255:
-        b -= randint(0, magnitude)
+        b -= magnitude
     if r == 0:
-        r += randint(0, magnitude)
+        r += magnitude
     if g == 0:
-        g += randint(0, magnitude)
+        g += magnitude
     if b == 0:
-        b += randint(0, magnitude)
+        b += magnitude
     return (r, g, b)
 
 def perturb_shade(rgb_color, magnitude):
@@ -96,21 +96,21 @@ def perturb_shade(rgb_color, magnitude):
     g = rgb_color[1]
     b = rgb_color[2]
     if minus:
-        r -= randint(0, magnitude)
-        g -= randint(0, magnitude)
-        b -= randint(0, magnitude)
+        r -= magnitude
+        g -= magnitude
+        b -= magnitude
     else:
-        r += randint(0, magnitude)
-        g += randint(0, magnitude)
-        b += randint(0, magnitude)
+        r += magnitude
+        g += magnitude
+        b += magnitude
     return (r, g, b)
 
 def simulate_shapes(num_examples: int,
                     shape_type: str,
-                    image_height: int,
-                    image_width: int, 
-                    min_x: int, 
-                    max_x: int, 
+                    image_width: int = 224,
+                    image_height: int = 224, 
+                    min_x: int = 50, 
+                    max_x: int = 100, 
                     colors_dict: dict = {
                         "yellow": (255, 255, 0),
                         "blue": (0, 0, 255),
@@ -135,8 +135,7 @@ def simulate_shapes(num_examples: int,
         min_x: Minimum size of the larger shape axis.
         max_x: Maximum size of the larger shape axis.
         colors_dict: Dictionary mapping color names to RGB tuples.
-        color_magnitude: Magnitude of color perturbation.
-        shape_magnitude: Magnitude of shade perturbation.
+        magnitude: Magnitude of color and/or shape perturbation.
         shades: Whether to include shade perturbations.
         *args: Additional positional arguments for shape creation.
         **kwargs: Additional keyword arguments for shape creation.
@@ -145,23 +144,28 @@ def simulate_shapes(num_examples: int,
         target_colors: List of target color names for each generated image.
         target_shapes: List of target shape names for each generated image.
         images: List of generated shape images as numpy arrays.
+        magnitudes: List of perturbation magnitudes.
+        rgb_colors: List of RGB tuples which are perturbed from base color.
     '''
 
     n = num_examples
+    num_color = len(colors_dict)
     if shades:
-        num_examples *= 8
+        num_examples *= (num_color + 2)
     else:
-        num_examples *= 6
+        num_examples *= (num_color)
     target_color = np.empty(num_examples, dtype=StringDType)
     target_shape = np.empty(num_examples, dtype=StringDType)
     images = np.zeros(
         (num_examples,
-            224,
-            224,
+            image_width,
+            image_height,
             3,
         ),
         dtype = np.uint8
     )
+    magnitudes = np.empty(num_examples, dtype=np.uint8)
+    rgb_colors = np.empty((num_examples, 3), dtype=np.uint8)
 
     # write loop to create examples
     # identify the redundancies in ../examples/simulate.ipynb
@@ -172,41 +176,81 @@ def simulate_shapes(num_examples: int,
 
     for _ in range(n):
 
-        if shape_name == 'circle':
+        width = randint(min_x, max_x)
+        height = width
 
-            # TO DO
-            # circle
+        for rgb_name, rgb_color in colors_dict.items():
 
-            pass
+            magnitude_rand = randint(0, magnitude)
+            rgb_color_rand = perturb_color(rgb_color, magnitude_rand)
+            upside_down = randint(0,1)
+            sideways = randint(0,1)
+            shp = Shape(shape_name, 
+                            image_width, 
+                            image_height, 
+                            width, 
+                            height, 
+                            rgb_color_rand, 
+                            rgb_name,
+                            upside_down,
+                            sideways,
+                            *args,
+                            **kwargs,
+                            )
+            images[itr,] = shp.get_image()
+            target_color[itr] = rgb_name
+            target_shape[itr] = shape_name
+            magnitudes[itr] = magnitude_rand
+            rgb_colors[itr,] = rgb_color_rand
+            itr += 1
 
-            # TO DO
-            # add white and black as color labels
+        if shades:
 
-            pass
+            # white
+            magnitude_rand = randint(0, magnitude)
+            rgb_color_rand = perturb_shade((0,0,0), magnitude_rand)
+            rgb_name = 'black'
+            shp = Shape(shape_name, 
+                            image_width, 
+                            image_height, 
+                            width, 
+                            height, 
+                            rgb_color_rand, 
+                            rgb_name,
+                            upside_down,
+                            sideways,
+                            *args,
+                            **kwargs,
+                            )
+            images[itr,] = shp.get_image()
+            target_color[itr] = rgb_name
+            target_shape[itr] = shape_name
+            magnitudes[itr] = magnitude_rand
+            rgb_colors[itr,] = rgb_color_rand
+            itr += 1
 
-        elif shape_name == 'triangle':
+            # black
+            magnitude_rand = randint(0, magnitude)
+            rgb_color_rand = perturb_shade((255,255,255), magnitude_rand)
+            rgb_name = 'white'
+            shp = Shape(shape_name, 
+                            image_width, 
+                            image_height, 
+                            width, 
+                            height, 
+                            rgb_color_rand, 
+                            rgb_name,
+                            upside_down,
+                            sideways,
+                            *args,
+                            **kwargs,
+                            )
+            images[itr,] = shp.get_image()
+            target_color[itr] = rgb_name
+            target_shape[itr] = shape_name
+            magnitudes[itr] = magnitude_rand
+            rgb_colors[itr,] = rgb_color_rand
+            itr += 1
 
-            # TO DO
-            # triangle
-
-            pass
-
-            # TO DO
-            # add white and black as color labels
-
-            pass
-
-        else:
-
-            # TO DO
-            # not circle or triangle
-
-            pass
-
-            # TO DO
-            # add white and black as colors
-
-            pass
-
-    return target_color, target_shape, images
+    return target_color, target_shape, images, rgb_colors, magnitudes
 
