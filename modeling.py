@@ -156,12 +156,9 @@ transform_pipeline = v2.Compose([
 
 # load the data
 target = np.loadtxt(f'{folder}/{target_file}', dtype=StringDType)
-print('here')
 X = torch.from_numpy(
     np.load(f'{folder}/{predictor_file}')
     ).permute(0,3,1,2)
-X = transform_pipeline(X)
-print('here')
 
 # label encode the targets
 # so that the target is numeric
@@ -169,7 +166,6 @@ encoder = LabelEncoder()
 encoder.fit(target)
 y = encoder.transform(target)
 y = torch.tensor(y)
-
 
 # Define the dataset loader as train_loader and test_loader
 # https://docs.pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
@@ -189,8 +185,6 @@ test_loader = DataLoader(
     batch_size=batch_size,
     shuffle=False
 )
-
-print('here')
 
 # initialize the model
 channels, width, height = X[0].shape
@@ -241,6 +235,7 @@ for epoch in range(num_epochs):
         optimizer.zero_grad()
         
         # put on the gpu or cpu device
+        input = transform_pipeline(inputs)
         inputs = inputs.to(device)
         labels = labels.to(device)
         
@@ -265,6 +260,7 @@ for epoch in range(num_epochs):
     running_loss = 0.
     with torch.no_grad():
         for inputs, labels in test_loader:
+            inputs = transform_pipeline(inputs)
             inputs = inputs.to(device)
             labels = labels.to(device)
             pred = model(inputs.float())
