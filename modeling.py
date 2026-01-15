@@ -156,7 +156,9 @@ transform_pipeline = v2.Compose([
 
 # load the data
 target = np.loadtxt(f'{folder}/{target_file}', dtype=StringDType)
-X = torch.from_numpy(f'{folder}/{predictor_file}').permute(0,3,1,2)
+X = torch.from_numpy(
+    np.load(f'{folder}/{predictor_file}')
+    ).permute(0,3,1,2)
 X = transform_pipeline(X)
 
 # label encode the targets
