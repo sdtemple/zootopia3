@@ -120,7 +120,7 @@ def simulate_shapes(num_examples: int,
                         "magenta": (255, 0, 255),
                     },
                     magnitude: int = 50,  
-                    shades: bool =True, 
+                    shades: bool = True, 
                     *args, 
                     **kwargs
                     ) -> tuple:

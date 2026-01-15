@@ -29,8 +29,7 @@ dependencies = [
     "torchvision",
     "timm",
     "pytest>=7.0.0",
-    "jupyterlab>=4.0.0",
-    "ipykernel>=7.0.1"
+
 ]
 
 [project.optional-dependencies]
@@ -38,6 +37,14 @@ vizualization = [
     "seaborn", 
     "plotly",
 ]
+notebook = [
+    "jupyterlab>=4.0.0",
+    "ipykernel>=7.0.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
 
 [project.urls]
 "Homepage" = "https://github.com/sdtemple/zootopia3"
