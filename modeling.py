@@ -188,7 +188,7 @@ test_loader = DataLoader(
 
 # initialize the model
 channels, width, height = X[0].shape
-num_classes = len(y_train.unique())
+num_classes = len(y.unique())
 model = MyCNN(
     num_classes, # number of classes
     width,
