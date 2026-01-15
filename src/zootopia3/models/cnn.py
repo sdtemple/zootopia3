@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from math import floor
 
 def calculate_after_conv(height, kernel_size, stride, padding,):
     return floor((height + 2 * padding - kernel_size) / stride) + 1
