@@ -156,10 +156,12 @@ transform_pipeline = v2.Compose([
 
 # load the data
 target = np.loadtxt(f'{folder}/{target_file}', dtype=StringDType)
+print('here')
 X = torch.from_numpy(
     np.load(f'{folder}/{predictor_file}')
     ).permute(0,3,1,2)
 X = transform_pipeline(X)
+print('here')
 
 # label encode the targets
 # so that the target is numeric
@@ -188,8 +190,10 @@ test_loader = DataLoader(
     shuffle=False
 )
 
+print('here')
+
 # initialize the model
-channels, width, height = images[0].shape
+channels, width, height = X[0].shape
 num_classes = len(y_train.unique())
 model = MyCNN(
     num_classes, # number of classes
