@@ -10,11 +10,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-from torch.utils.data import DataLoader, TensorDataset, Dataset
+from torch.utils.data import DataLoader, TensorDataset, Dataset, random_split
 from torchvision.transforms import v2
 
 # common sklearn imports 
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
 from zootopia3 import MyCNN
@@ -157,38 +156,23 @@ transform_pipeline = v2.Compose([
 
 # load the data
 target = np.loadtxt(f'{folder}/{target_file}', dtype=StringDType)
-images = np.load(f'{folder}/{predictor_file}')
-images = torch.tensor(images).permute(0,3,1,2)
-
+X = torch.from_numpy(f'{folder}/{predictor_file}').permute(0,3,1,2)
+X = transform_pipeline(X)
 
 # label encode the targets
 # so that the target is numeric
 encoder = LabelEncoder()
 encoder.fit(target)
-target_encoded = encoder.transform(target)
+y = encoder.transform(target)
+y = torch.tensor(y)
 
-# perform the train test split
-# so that we evaluate the model
-# on held out data
-# use this function
-# https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
-
-X_train, X_test, y_train, y_test = train_test_split(
-    images, target_encoded, test_size = test_size, random_state=100395
-)
-del images
-
-# convert data to torch tensors
-X_train = transform_pipeline(X_train)
-X_test = transform_pipeline(X_test)
-y_train = torch.tensor(y_train)
-y_test = torch.tensor(y_test)
 
 # Define the dataset loader as train_loader and test_loader
 # https://docs.pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader
 
-train_data = TensorDataset(X_train, y_train)
-test_data = TensorDataset(X_test, y_test)
+train_size = 1 - test_size
+full_data = TensorDataset(X, y)
+train_data, test_data = random_split(full_data, [train_size, test_size])
 
 train_loader = DataLoader(
     train_data,
