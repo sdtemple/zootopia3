@@ -176,6 +176,7 @@ target_encoded = encoder.transform(target)
 X_train, X_test, y_train, y_test = train_test_split(
     images, target_encoded, test_size = test_size, random_state=100395
 )
+del images
 
 # convert data to torch tensors
 X_train = transform_pipeline(X_train)

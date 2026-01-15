@@ -18,12 +18,61 @@ Alongside these datasets, we fit the following model objectives:
 
 Learn how to train neural networks from scratch.
 
+1. Run `answers/simulate-exercise.ipynb` to get data.
+2. Fill in the ` # TO DO ` parts in `examples/modeling-exercise-*.ipynb`. 
+3. Compare to solutions in `answers/modeling-exercise-*.ipynb`.
+4. You can explore different parameters on big models with `modeling.py`.
+    - Write a shell script that invokes `modeling.py` and pass to `slurm`.
+
+The package defined under `src/` provides:
+- A class `Shape` that instantiates an image with 1 colored shape
+- A function `simulate_shapes()` to make many images for an image classifier
+- A model class `MyCNN` to fit a standard architecture
+
+Caution: you may need GPU resources if your models or data are large.
+
 ## Requirements
 
 - Python 3.10+
 
 ## Install
 
+If you want to install the package only from the internet:
+
 ```
+pip install zootopia3
+```
+
+If you want to set up an isolated environment and build locally:
+
+```
+python -m venv path-to/your-environment
+source path-to/your-environment/bin/activate
 pip install -e .
 ```
+
+You run the `pip` command within this repo.
+
+## Test
+
+You can run the test scripts in `tests/` with the following:
+
+```
+python -m pytest
+```
+
+## Data
+
+I made a training and validation set with:
+- 2000 samples for each combo
+- `mix_x = 20`
+- `max_x = 100`
+- `shades = True`
+- `magnitude = 50`
+
+I made a testing set with:
+- 20 samples for each combo
+- `min_x = 10`
+- `max_x = 50`
+
+Therefore, the test set is a more difficult prediction problem.
