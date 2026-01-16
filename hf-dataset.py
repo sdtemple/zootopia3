@@ -2,7 +2,7 @@ import sys
 from datasets import Dataset, Features, Image, ClassLabel
 import numpy as np
 
-X_file, y_file, z_file = sys.argv[1:]
+X_file, y_file, z_file, repo_name = sys.argv[1:]
 X = np.load(X_file)
 y = np.loadtxt(y_file, dtype=str)
 z = np.loadtxt(z_file, dtype=str)
@@ -30,4 +30,4 @@ features = Features({
 
 # Create and push
 ds = Dataset.from_generator(data_generator, features=features)
-ds.push_to_hub("sdtemple/colored-shapes")
+ds.push_to_hub(repo_name)

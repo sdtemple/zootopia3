@@ -53,14 +53,6 @@ pip install -e .
 
 You run the `pip` command within this repo.
 
-## Test
-
-You can run the test scripts in `tests/` with the following:
-
-```
-python -m pytest
-```
-
 ## Data
 
 I made a training and validation set with:
@@ -76,3 +68,26 @@ I made a testing set with:
 - `max_x = 50`
 
 Therefore, the test set is a more difficult prediction problem.
+
+You can find the test data [here](https://huggingface.co/datasets/sdtemple/colored-shapes).
+
+## Sharing your work
+
+To upload your model to Hugging Face, run these short scripts.
+```
+python hf-convert.py your-model.pt your-model.safetensors
+python hf-model.py your-model.safetensors sdtemple/color-classifier
+```
+
+To upload your data to Hugging Face, run this script.
+```
+python hf-dataset.py images.npy target_color.txt target_shape.txt your-username/colored-shapes
+```
+
+## Test
+
+You can run the test scripts in `tests/` with the following:
+
+```
+python -m pytest
+```
