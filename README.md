@@ -21,8 +21,10 @@ Learn how to train neural networks from scratch.
 1. Run `answers/simulate-exercise.ipynb` to get data.
 2. Fill in the ` # TO DO ` parts in `examples/modeling-exercise-*.ipynb`. 
 3. Compare to solutions in `answers/modeling-exercise-*.ipynb`.
-4. You can explore different parameters on big models with `modeling.py`.
-    - Write a shell script that invokes `modeling.py` and pass to `slurm`.
+4. You can explore different parameters on big models with `scripts/modeling.py`.
+    - Write a shell script that invokes `scripts/modeling.py` and pass args to `slurm`.
+5. Run `scripts/modeling-final.py` for best model choice (train + val data).
+6. (Optional) Compare to the benchmark [here](https://huggingface.co/datasets/sdtemple/colored-shapes).
 
 The package defined under `src/` provides:
 - A class `Shape` that instantiates an image with 1 colored shape
@@ -75,13 +77,13 @@ You can find the test data [here](https://huggingface.co/datasets/sdtemple/color
 
 To upload your model to Hugging Face, run these short scripts.
 ```
-python hf-convert.py your-model.pt your-model.safetensors
-python hf-model.py your-model.safetensors sdtemple/color-classifier
+python scripts/hf-convert.py your-model.pt your-model.safetensors
+python scripts/hf-model.py your-model.safetensors sdtemple/color-classifier
 ```
 
 To upload your data to Hugging Face, run this script.
 ```
-python hf-dataset.py images.npy target_color.txt target_shape.txt your-username/colored-shapes
+python scripts/hf-dataset.py images.npy target_color.txt target_shape.txt your-username/colored-shapes
 ```
 
 ## Test

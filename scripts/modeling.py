@@ -235,7 +235,7 @@ for epoch in range(num_epochs):
         optimizer.zero_grad()
         
         # put on the gpu or cpu device
-        input = transform_pipeline(inputs)
+        inputs = transform_pipeline(inputs)
         inputs = inputs.to(device)
         labels = labels.to(device)
         
