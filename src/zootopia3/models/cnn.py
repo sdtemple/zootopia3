@@ -1,11 +1,12 @@
 import torch
 import torch.nn as nn
 from math import floor
+from huggingface_hub import PyTorchModelHubMixin # Import mixin for Hugging Face Hub compatibility
 
 def calculate_after_conv(height, kernel_size, stride, padding,):
     return floor((height + 2 * padding - kernel_size) / stride) + 1
 
-class MyCNN(nn.Module):
+class MyCNN(nn.Module, PyTorchModelHubMixin):
     '''Custom CNN to classify the shape or color of an object in an image'''
 
     def __init__(self,

@@ -1,7 +1,8 @@
 import torch
 import torch.nn as nn
+from huggingface_hub import PyTorchModelHubMixin # Import mixin for Hugging Face Hub compatibility
 
-class MyRNN(nn.Module):
+class MyRNN(nn.Module, PyTorchModelHubMixin):
     '''Recurrent neural network to predict the next point in a sine wave'''
 
     def __init__(self, 

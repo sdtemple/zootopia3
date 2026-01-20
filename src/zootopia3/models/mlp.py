@@ -1,10 +1,11 @@
 import torch
 import torch.nn as nn
+from huggingface_hub import PyTorchModelHubMixin # Import mixin for Hugging Face Hub compatibility
 
 # build a model class
 # https://docs.pytorch.org/docs/stable/nn.html
 
-class MyMLP(nn.Module):
+class MyMLP(nn.Module, PyTorchModelHubMixin):
     '''Multilayer perceptron to predict the next point in a sine wave'''
 
     def __init__(self, 
