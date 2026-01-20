@@ -239,7 +239,7 @@ for epoch in range(num_epochs):
     train_loss = running_loss / len(train_loader)
     train_losses.append(train_loss)
 
-    print(f"Epoch {epoch+1}/{num_epochs}, Train Loss: {train_loss:.4f}, Test Loss {test_loss:.4f}")
+    print(f"Epoch {epoch+1}/{num_epochs}, Train Loss: {train_loss:.4f}")
 
 # save the model
 checkpoint = {
