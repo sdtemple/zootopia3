@@ -60,9 +60,21 @@ class MyCNN(nn.Module, PyTorchModelHubMixin):
 
         super(MyCNN, self).__init__()
 
-        self.num_classes_ = num_classes
-        self.height_ = height
-        self.width_ = width
+        self.config = {
+            "num_classes": num_classes,
+            "height": height,
+            "width": width,
+            "num_input_channels": num_input_channels,
+            "num_cnn_channels": num_cnn_channels,
+            "num_cnn_layers": num_cnn_layers,
+            "hidden_dim": hidden_dim,
+            "num_layers": num_layers,
+            "kernel_size": kernel_size,
+            "stride": stride,
+            "padding": padding,
+            "pooling": pooling,
+            "dropout": dropout
+        }
 
         # convolutional layers
 

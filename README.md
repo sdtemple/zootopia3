@@ -78,13 +78,15 @@ You can find the test data [here](https://huggingface.co/datasets/sdtemple/color
 To upload your model to Hugging Face, run these short scripts.
 ```
 python scripts/hf-convert.py your-model.pt your-model.safetensors
-python scripts/hf-model.py your-model.safetensors sdtemple/color-classifier
+python scripts/hf-model.py your-model.safetensors sdtemple/color-prediction-model
 ```
 
 To upload your data to Hugging Face, run this script.
 ```
 python scripts/hf-dataset.py images.npy target_color.txt target_shape.txt your-username/colored-shapes
 ```
+
+If you successfully uploaded a pretrained model to Hugging Face, you can run it on a CPU with `answers/inference-exercise.ipynb`.
 
 ## Test
 
