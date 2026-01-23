@@ -176,8 +176,8 @@ channels, width, height = X[0].shape
 num_classes = len(y.unique())
 model = MyCNN(
     num_classes, # number of classes
-    width,
     height,
+    width,
     channels,
     num_cnn_channels,
     num_cnn_layers,
@@ -246,11 +246,11 @@ checkpoint = {
     'epoch': epoch,
     'model_state_dict': model.state_dict(),
     'optimizer_state_dict': optimizer.state_dict(),
-    # custom items
-    'train_losses': train_losses,
     'config': {
-        'lr': lr,
-        'batch_size': batch_size,
+        'num_classes': num_classes,
+        'height': height,
+        'width': width,
+        'num_input_channels': channels,
         'num_cnn_channels': num_cnn_channels,
         'num_cnn_layers': num_cnn_layers,
         'num_layers': num_layers,
@@ -260,6 +260,8 @@ checkpoint = {
         'padding': padding,
         'pooling': pooling,
         'dropout': dropout
-    }
+    },
+    # custom items
+    'train_losses': train_losses,
 }
 torch.save(checkpoint, f'{folder}/{output_file}')

@@ -77,6 +77,11 @@ You can find the test data [here](https://huggingface.co/datasets/sdtemple/color
 
 To upload your model to Hugging Face, run these short scripts.
 ```
+python hf-push.py your-model.pth sdtemple/color-prediction-model
+```
+
+A less elegant solution where you have to manually write the `config.json` data is:
+```
 python scripts/hf-convert.py your-model.pt your-model.safetensors
 python scripts/hf-model.py your-model.safetensors sdtemple/color-prediction-model
 ```

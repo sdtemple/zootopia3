@@ -10,7 +10,7 @@ class MyCNN(nn.Module, PyTorchModelHubMixin):
     '''Custom CNN to classify the shape or color of an object in an image'''
 
     def __init__(self,
-                    num_classes,
+                    num_classes: int = 2,
                     height: int = 224,
                     width: int = 224,
                     num_input_channels = 3,
@@ -18,7 +18,6 @@ class MyCNN(nn.Module, PyTorchModelHubMixin):
                     num_cnn_layers = 0,
                     hidden_dim: int = 16,
                     num_layers: int = 0,
-                    linear_activation = nn.ReLU,
                     kernel_size: int = 3,
                     stride: int = 1,
                     padding: int = 1,
@@ -48,8 +47,6 @@ class MyCNN(nn.Module, PyTorchModelHubMixin):
         num_layers : int
             Number of Linear() layers on top of an
             initial layer and a final layer
-        linear_activation :
-            Activation layer like nn.ReLU
         kernel_size : int
         stride : int
         padding : int
@@ -59,6 +56,8 @@ class MyCNN(nn.Module, PyTorchModelHubMixin):
         '''
 
         super(MyCNN, self).__init__()
+
+        linear_activation = nn.ReLU
 
         self.config = {
             "num_classes": num_classes,
