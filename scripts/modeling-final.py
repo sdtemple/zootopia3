@@ -123,9 +123,6 @@ batch_size = args.batch_size
 num_epochs = args.num_epochs
 lr = args.lr
 
-# activation function is hard coded
-linear_activation = nn.ReLU
-
 # we will not have a gpu accessible
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 if not torch.cuda.is_available():
@@ -183,7 +180,6 @@ model = MyCNN(
     num_cnn_layers,
     hidden_dim,
     num_layers,
-    linear_activation,
     kernel_size,
     stride,
     padding,
